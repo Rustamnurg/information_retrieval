@@ -1,0 +1,10 @@
+MANIFEST.in
+VERSION
+selector.py
+setup.cfg
+setup.py
+selector.egg-info/PKG-INFO
+selector.egg-info/SOURCES.txt
+selector.egg-info/dependency_links.txt
+selector.egg-info/requires.txt
+selector.egg-info/top_level.txt

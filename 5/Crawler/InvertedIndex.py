@@ -8,7 +8,7 @@ inverted_index = {}
 
 for index, filename in enumerate(data):
     index += 1
-    f = open(str(index) + "stemmer.txt", 'r')
+    f = open(str(index) + "lemmatized.txt", 'r')
     text = f.read()
     f.close()
 

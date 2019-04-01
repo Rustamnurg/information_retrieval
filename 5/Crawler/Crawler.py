@@ -7,7 +7,7 @@ def crawl_web(initial_url):
     to_crawl = []
     crawled = set()
     to_crawl.append(initial_url)
-    max_count = 50
+    max_count = 5
 
     while to_crawl:
         current_url = to_crawl.pop(0)
