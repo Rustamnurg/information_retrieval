@@ -41,7 +41,7 @@ if __name__ == '__main__':
 
     words = sys.argv[1:]
 
-    zeros = np.zeros(len(tf_idf), dtype=float)
+    zeros = np.zeros(len(tf_idf) - 1, dtype=float)
 
     m = Mystem()
     lemmas = [m.lemmatize(word.lower())[0] for word in words]
@@ -58,12 +58,10 @@ if __name__ == '__main__':
     search_vec_len = np.linalg.norm(zeros)
 
     scores = []
+
     for i, lemma in enumerate(vectors):
-        print(i)
-        print(lemma)
-        print()
         scores.append((np.divide(np.matmul(vectors[i], zeros), (doc_vec_len[i] * search_vec_len)), links[str(i + 1)]))
 
     scores.sort(reverse=True)
-    for i in range(10):
+    for i in range(5):
         print(scores[i][1])

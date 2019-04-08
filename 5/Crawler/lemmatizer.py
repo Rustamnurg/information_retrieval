@@ -1,6 +1,6 @@
 from pymystem3 import Mystem
 
-count = 51
+count = 102
 
 m = Mystem()
 

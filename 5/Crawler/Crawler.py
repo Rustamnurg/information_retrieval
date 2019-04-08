@@ -1,15 +1,19 @@
 import requests
 import re
 from bs4 import BeautifulSoup
+import time
+import random
 
-url = 'https://www.pravda.ru'
+max_count = 101
+url = 'https://www.business-gazeta.ru'#'http://www.selfcreation.ru/category/zdorove'#'http://fanserials.golf'
 def crawl_web(initial_url):
     to_crawl = []
     crawled = set()
     to_crawl.append(initial_url)
-    max_count = 5
 
     while to_crawl:
+        print(random.random())
+        time.sleep(random.random())
         current_url = to_crawl.pop(0)
         r = requests.get(current_url)
         crawled.add(current_url)
@@ -18,12 +22,6 @@ def crawl_web(initial_url):
                 url = current_url + url
             pattern = re.compile('https?')
             if pattern.match(url):
-                soup = BeautifulSoup(r.content, 'html.parser')
-                for script in soup(["script", "style"]):
-                    script.decompose()
-                file = open(str(len(crawled)) + '.txt', 'w')
-                file.write(soup.get_text(strip=True, separator=" "))
-                file.close()
                 to_crawl.append(url)
                 print(str(len(crawled)) + url)
             if len(crawled) >= max_count:
@@ -34,8 +32,26 @@ def crawl_web(initial_url):
 
 file = open('urls.json', 'w')
 crawled = crawl_web(url)
-ursString = ''
+ursString = '{\n'
+index = 0
 for url in crawled:
-    ursString += url + '\n'
+    time.sleep(random.random())
+    index += 1
+    print(str(index) + url)
+    if index < max_count:
+     ursString += '  "' + str(index) + '": "' + url + '",\n'
+    else:
+     ursString += '  "' + str(index) + '": "' + url + '"\n'
+
+    r = requests.get(url)
+    soup = BeautifulSoup(r.content, 'html.parser')
+    for script in soup(["script", "style"]):
+        script.decompose()
+    filePage = open(str(index) + '.txt', 'w')
+    filePage.write(soup.get_text(strip=True, separator=" "))
+    filePage.close()
+
+ursString += '}'
+
 file.write(ursString)
 file.close()

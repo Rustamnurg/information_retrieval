@@ -52,9 +52,16 @@ Functions.write_to_file_results(tokens_idf, "IDF", "{:.4f}", for_each_document=F
 
 tf_idf = {}
 print("calculate TF*IDF")
+index = 1
+print(tokens_tf)
 for lemma in tokens_tf:
     for filename in tokens_tf[lemma]:
+        print(str(index))
+        print(lemma)
+        index += 1
         if lemma not in tf_idf:
             tf_idf[lemma] = []
-        tf_idf[lemma].append(tokens_tf[lemma][filename] * tokens_idf[lemma])
+        if lemma != 'наиль':
+            tf_idf[lemma].append(tokens_tf[lemma][filename] * tokens_idf[lemma])
+
 Functions.write_to_file_tf_idf(tf_idf)

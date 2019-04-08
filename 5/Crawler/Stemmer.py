@@ -1,7 +1,7 @@
 from nltk.stem.snowball import SnowballStemmer
 stemmer = SnowballStemmer("russian")
 
-count = 51
+count = 102
 
 
 index = 1
